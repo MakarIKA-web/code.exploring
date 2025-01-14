@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fag array uke 3</title>
+    <script src="js.js" defer></script>
+    <!DOCTYPE html>
+    <style>
+        @font-face {
+    font-family: "CustomFont"; /* A name for your custom font */
+    src: url("WARNING.otf");
+    font-weight: normal; /* Optional: Define font weight */
+    font-style: normal;  /* Optional: Define font style */
+}
+
+        body {
+            margin: auto;
+            font-size: 60px;
+            letter-spacing: 2px;
+            font-family: "CustomFont", sans-serif;
+            margin: 20px;
+        }
+        #consoleOutput {
+            padding: 10px;
+            height: 300px;
+            width: 800px;
+            overflow-y: scroll;
+            position: absolute; 
+            z-index: 1;
+            font-size: 40px;
+            white-space: pre-wrap;
+            color: rgb(0, 255, 13);
+        }
+
+        #consoleOutput::-webkit-scrollbar {
+        display: none;
+    }
+
+    #consoleOutput{
+        scrollbar-width: none; /* Firefox */
+    }
+
+        #consoleback {
+            background-image: url(5a1c1ead30a8c146e13ec0857ee8dc3a.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            width: 800px;
+            filter: blur(10px);
+            position: absolute; 
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-left: 500px;">
+        <h1 style="margin-top: 200px;">Console Output</h1>
+        <div id="consoleOutput"></div>
+        <div id="consoleback"></div>
+    </div>
+
+    <script>
+        // Store the original console.log function
+        const originalConsoleLog = console.log;
+
+        // Select the console output container
+        const consoleOutputDiv = document.getElementById('consoleOutput');
+
+        // Override console.log
+        console.log = function (...args) {
+            // Convert arguments to a string
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+
+            // Append the message to the console output div
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            consoleOutputDiv.appendChild(messageElement);
+
+            // Scroll to the bottom of the output container
+            consoleOutputDiv.scrollTop = consoleOutputDiv.scrollHeight;
+
+            // Call the original console.log
+            originalConsoleLog.apply(console, args);
+        };
+
+        // Example: Start your own logging here
+        // console.log("Your messages will appear here!");
+    </script>
+</body>
+</html>
+       
